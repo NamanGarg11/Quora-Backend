@@ -35,3 +35,21 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### Environment files ###
+.env
+.env.*
+*.local
+
+### Docker volumes / runtime ###
+mongo-data/
+redis-data/
+kafka-data/
+
+### Logs ###
+*.log
+
+### OS junk ###
+.DS_Store
+Thumbs.db
