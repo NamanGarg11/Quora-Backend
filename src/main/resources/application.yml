@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: QuoraApp
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: quora_db
+      auto-index-creation: true
+  elasticsearch:
+    uris: http://localhost:9200
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    type: redis
+  kafka:
+    # This is the address from your docker-compose.yml's ports section
+    bootstrap-servers: localhost:9092
+    producer:
+      # How to serialize the message key (usually a String)
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # How to serialize the message value (using JSON for objects)
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      # A unique ID for your consumer group
+      group-id: view-count-consumer
+      # How to deserialize the message key
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # How to deserialize the JSON value back into an object
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      # Trust all packages for deserialization (for development)
+      properties:
+        spring.json.trusted.packages: '*'
+      # Start reading from the earliest message if no offset is found
+      auto-offset-reset: earliest
